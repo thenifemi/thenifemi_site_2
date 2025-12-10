@@ -16,6 +16,7 @@ interface Role {
 
 interface Experience {
   company: string;
+  website: string;
   location: string;
   totalDuration: string;
   logo: string;
@@ -25,7 +26,8 @@ interface Experience {
 const experiences: Experience[] = [
   {
     company: "Fetchly Labs",
-    location: "Denver, Colorado, United States",
+    website: "https://fetch.ly",
+    location: "Denver, Colorado",
     totalDuration: "1 year, 2 months",
     logo: "/logos/fetchly.jpeg",
     roles: [
@@ -43,7 +45,8 @@ const experiences: Experience[] = [
   },
   {
     company: "tem mimo",
-    location: "",
+    website: "https://temmimo.com",
+    location: "Curitiba, Paraná",
     totalDuration: "1 year, 8 months",
     logo: "/logos/mimo_logo.png",
     roles: [
@@ -56,7 +59,8 @@ const experiences: Experience[] = [
   },
   {
     company: "ArcTouch",
-    location: "San Francisco, California, United States",
+    website: "https://arctouch.com",
+    location: "San Francisco, California",
     totalDuration: "1 year, 4 months",
     logo: "/logos/arctouch.png",
     roles: [
@@ -69,7 +73,8 @@ const experiences: Experience[] = [
   },
   {
     company: "Fetchly Labs",
-    location: "Texas, United States",
+    website: "https://fetch.ly",
+    location: "Denver, Colorado",
     totalDuration: "2 years, 4 months",
     logo: "/logos/fetchly.jpeg",
     roles: [
@@ -82,7 +87,8 @@ const experiences: Experience[] = [
   },
   {
     company: "Null Bug",
-    location: "Francisco Beltrão, Paraná, Brazil",
+    website: "https://nullbug.dev",
+    location: "Francisco Beltrão, Paraná",
     totalDuration: "1 year, 3 months",
     logo: "/logos/nullbug.jpeg",
     roles: [
@@ -95,7 +101,8 @@ const experiences: Experience[] = [
   },
   {
     company: "Rocket Software",
-    location: "Blumenau, Santa Catarina, Brazil",
+    website: "#",
+    location: "Blumenau, Santa Catarina",
     totalDuration: "2 years, 4 months",
     logo: "/logos/R.png",
     roles: [
@@ -108,7 +115,8 @@ const experiences: Experience[] = [
   },
   {
     company: "Protech Advance",
-    location: "",
+    website: "#",
+    location: "Surulere, Lagos",
     totalDuration: "3 months",
     logo: "/logos/nck.jpeg",
     roles: [
@@ -167,9 +175,13 @@ export function ExperienceSection() {
                 <div className="flex items-start justify-between gap-2">
                   <div className="w-full">
                     <div className="flex items-center justify-between gap-2">
-                      <h3 className="text-white font-medium text-xl">
+                      <a
+                        href={exp.website}
+                        target="_blank"
+                        className="text-white font-medium text-xl cursor-pointer"
+                      >
                         {exp.company}
-                      </h3>
+                      </a>
 
                       <span className="text-white/80 text-xl whitespace-nowrap ml-auto">
                         {exp.totalDuration}

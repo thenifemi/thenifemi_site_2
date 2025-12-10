@@ -35,7 +35,6 @@ interface NavLinkProps {
 
 function NavLink({ name, href, isActive, showWreaths = false }: NavLinkProps) {
   const isHome = href === "/";
-  const textColor = isActive ? COLORS.active : COLORS.inactive;
   const underlineColor = isHome ? COLORS.homeUnderline : COLORS.inactive;
 
   return (
@@ -47,7 +46,7 @@ function NavLink({ name, href, isActive, showWreaths = false }: NavLinkProps) {
     >
       <Link
         href={href}
-        className={`flex items-center gap-1 text-xl hover:text-white transition-colors duration-200 ${
+        className={`group flex items-center gap-1 text-xl hover:text-white transition-colors duration-200 ${
           isActive ? "text-white" : "text-[#a8a8a8]"
         }`}
       >
@@ -55,8 +54,10 @@ function NavLink({ name, href, isActive, showWreaths = false }: NavLinkProps) {
           <HugeiconsIcon
             icon={LaurelWreathLeft03Icon}
             size={18}
-            color={textColor}
             strokeWidth={1}
+            className={`${
+              isActive ? "text-white" : "text-[#a8a8a8]"
+            } group-hover:text-amber-400 transition-colors`}
           />
         )}
         {name}
@@ -64,8 +65,10 @@ function NavLink({ name, href, isActive, showWreaths = false }: NavLinkProps) {
           <HugeiconsIcon
             icon={LaurelWreathRight03Icon}
             size={18}
-            color={textColor}
             strokeWidth={1}
+            className={`${
+              isActive ? "text-white" : "text-[#a8a8a8]"
+            } group-hover:text-amber-400 transition-colors`}
           />
         )}
       </Link>
