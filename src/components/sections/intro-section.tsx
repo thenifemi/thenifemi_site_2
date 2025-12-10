@@ -10,13 +10,13 @@ export function IntroSection() {
 
   return (
     <section>
-      <p className="text-xl md:text-2xl text-white/80 leading-relaxed">
+      <p className="text-2xl text-white/80 leading-relaxed">
         <span className="text-white">Nifemi</span> here!
       </p>
 
-      <p className="text-xl md:text-2xl text-white/80 leading-relaxed">
+      <p className="text-2xl text-white/80 leading-relaxed">
         Software engineer with over 7 years of{" "}
-        <Link href="#experience" className="hover:text-white transition-colors">
+        <Link href="#experience" className="hover:text-white transition-colors text-2xl">
           <Highlighter action="underline" color="#a8a8a8" strokeWidth={1} padding={-6}>
             experience
           </Highlighter>
@@ -39,7 +39,7 @@ export function IntroSection() {
       </div>
 
       {expanded && (
-        <div className="mt-4 space-y-4 text-xl md:text-2xl text-white/80 leading-relaxed animate-in fade-in slide-in-from-top-2 duration-300">
+        <div className="mt-4 space-y-4 text-2xl text-white/80 leading-relaxed animate-in fade-in slide-in-from-top-2 duration-300">
           <p>
             In addition to my professional work, I also have a passion for
             open-source projects. I&apos;ve authored and contributed to a

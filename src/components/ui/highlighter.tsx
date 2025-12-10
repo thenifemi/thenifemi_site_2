@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useId } from "react"
 import type React from "react"
 import { useInView } from "motion/react"
 import { annotate } from "rough-notation"
@@ -27,6 +27,9 @@ interface HighlighterProps {
   isView?: boolean
 }
 
+// Global set to track which highlighters have already animated
+const animatedHighlighters = new Set<string>()
+
 export function Highlighter({
   children,
   action = "highlight",
@@ -38,6 +41,7 @@ export function Highlighter({
   multiline = true,
   isView = false,
 }: HighlighterProps) {
+  const id = useId()
   const elementRef = useRef<HTMLSpanElement>(null)
   const annotationRef = useRef<RoughAnnotation | null>(null)
 
@@ -55,36 +59,30 @@ export function Highlighter({
     const element = elementRef.current
     if (!element) return
 
-    const annotationConfig = {
+    const hasAnimated = animatedHighlighters.has(id)
+    const duration = hasAnimated ? 0 : animationDuration
+
+    const annotation = annotate(element, {
       type: action,
       color,
       strokeWidth,
-      animationDuration,
+      animationDuration: duration,
       iterations,
       padding,
       multiline,
-    }
-
-    const annotation = annotate(element, annotationConfig)
-
-    annotationRef.current = annotation
-    annotationRef.current.show()
-
-    const resizeObserver = new ResizeObserver(() => {
-      annotation.hide()
-      annotation.show()
     })
 
-    resizeObserver.observe(element)
-    resizeObserver.observe(document.body)
+    annotationRef.current = annotation
+    annotation.show()
+    animatedHighlighters.add(id)
 
     return () => {
-      if (element) {
-        annotate(element, { type: action }).remove()
-        resizeObserver.disconnect()
+      if (annotationRef.current) {
+        annotationRef.current.remove()
       }
     }
   }, [
+    id,
     shouldShow,
     action,
     color,
@@ -101,3 +99,4 @@ export function Highlighter({
     </span>
   )
 }
+
