@@ -10,42 +10,51 @@ export function IntroSection() {
 
   return (
     <section>
-      <p className="text-2xl text-white/80 mb-2">
-        <span className="text-white">Nifemi</span> here!
+      <p className="text-2xl text-foreground/80 mb-2">
+        <span className="text-foreground">Nifemi</span> here!
       </p>
 
-      <p className="text-2xl text-white/80">
+      <p className="text-2xl text-foreground/80">
         Software engineer with over 7 years of{" "}
-        <Link href="#experience" className="hover:text-white transition-colors text-2xl">
-          <Highlighter action="underline" color="#a8a8a8" strokeWidth={1} padding={-6}>
+        <Link
+          href="#experience"
+          className="hover:text-foreground transition-colors text-2xl"
+        >
+          <Highlighter
+            action="underline"
+            color="currentColor"
+            strokeWidth={1}
+            padding={-6}
+          >
             experience
           </Highlighter>
         </Link>
         . Over the years, I&apos;ve built a variety of apps and games for both
-        iOS and Android, and I&apos;ve also worked on several web
-        applications.
+        iOS and Android, and I&apos;ve also worked on several web applications.
       </p>
 
       <div className="flex justify-end">
         <button
           onClick={() => setExpanded(!expanded)}
-          className="text-sm text-white/80 hover:text-white transition-colors flex items-center gap-1 cursor-pointer"
+          className="text-sm text-foreground/80 hover:text-foreground transition-colors flex items-center gap-1 cursor-pointer"
         >
           {expanded ? "Read less" : "Read more"}
           <ChevronRight
-            className={`w-4 h-4 transition-transform ${expanded ? "rotate-270" : " rotate-90"}`}
+            className={`w-4 h-4 transition-transform ${
+              expanded ? "rotate-270" : " rotate-90"
+            }`}
           />
         </button>
       </div>
 
       {expanded && (
-        <div className="mt-2 space-y-4 text-2xl text-white/80 animate-in fade-in slide-in-from-top-2 duration-300">
+        <div className="mt-2 space-y-4 text-2xl text-foreground/80 animate-in fade-in slide-in-from-top-2 duration-300">
           <p>
             In addition to my professional work, I also have a passion for
-            open-source projects. I&apos;ve authored and contributed to a
-            number of them, and I&apos;m always excited to collaborate with
-            other developers. I love open-source, learning in public, and
-            sharing what I learn with others.
+            open-source projects. I&apos;ve authored and contributed to a number
+            of them, and I&apos;m always excited to collaborate with other
+            developers. I love open-source, learning in public, and sharing what
+            I learn with others.
           </p>
 
           <p>
@@ -58,10 +67,10 @@ export function IntroSection() {
           </p>
 
           <p>
-            Last but not least, huge dog and cat lover and I adore spending time with
-            my family. Whether that&apos;s going out to a dog park or just
-            hanging out with my loved ones, it&apos;s always the highlight of
-            my day.
+            Last but not least, huge dog and cat lover and I adore spending time
+            with my family. Whether that&apos;s going out to a dog park or just
+            hanging out with my loved ones, it&apos;s always the highlight of my
+            day.
           </p>
         </div>
       )}

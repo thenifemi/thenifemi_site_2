@@ -9,7 +9,6 @@ import {
   CopyrightIcon,
   LaurelWreathLeft03Icon,
   LaurelWreathRight03Icon,
-  Location01Icon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Download } from "lucide-react";
@@ -37,35 +36,35 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="flex flex-col items-center gap-14 py-12 px-6 mt-16 border-t border-white/10">
+    <footer className="flex flex-col items-center gap-14 py-12 px-6 mt-16 border-t border-border">
       {/* Nifemi with Wreaths */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-2 md:gap-6">
         <Link
           href="/"
-          className="group flex items-center gap-1 text-xl text-white hover:text-white/80 transition-colors"
+          className="group flex items-center gap-1 text-xl text-foreground hover:text-foreground/80 transition-colors"
         >
           <HugeiconsIcon
             icon={LaurelWreathLeft03Icon}
             size={18}
             strokeWidth={1}
-            className="text-white group-hover:text-amber-400 transition-colors"
+            className="text-amber-400"
           />
           <span>Nifemi</span>
           <HugeiconsIcon
             icon={LaurelWreathRight03Icon}
             size={18}
             strokeWidth={1}
-            className="text-white group-hover:text-amber-400 transition-colors"
+            className="text-amber-400"
           />
         </Link>
 
         {/* Download Resume */}
-        <Highlighter action="underline" color="#fff" strokeWidth={2}>
+        <Highlighter action="underline" color="currentColor" strokeWidth={2}>
           <a
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/80 hover:text-white text-lg flex items-center gap-2 cursor-pointer"
+            className="text-foreground/80 hover:text-foreground text-lg flex items-center gap-2 cursor-pointer"
           >
             Download resumé
             <Download className="w-4 h-4" />
@@ -81,7 +80,7 @@ export function Footer() {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-white/70 hover:text-white transition-colors duration-200"
+            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
             <HugeiconsIcon icon={link.icon} size={20} strokeWidth={1.5} />
             <span className="text-xl">{link.text}</span>
@@ -90,7 +89,7 @@ export function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="flex items-center gap-2 text-[#a8a8a8] text-base">
+      <div className="flex items-center gap-2 text-muted-foreground text-base">
         <HugeiconsIcon icon={CopyrightIcon} size={16} strokeWidth={1.5} />
         <span>{currentYear} Purple Engineering.</span>
       </div>

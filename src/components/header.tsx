@@ -8,13 +8,7 @@ import {
   LaurelWreathRight03Icon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-
-// Constants
-const COLORS = {
-  active: "#fff",
-  inactive: "#a8a8a8",
-  homeUnderline: "#fbbf24",
-} as const;
+import { ThemeSwitcher } from "@/components/theme-switcher";
 
 const navLinks = [
   { name: "Nifemi", href: "/" },
@@ -34,20 +28,17 @@ interface NavLinkProps {
 }
 
 function NavLink({ name, href, isActive, showWreaths = false }: NavLinkProps) {
-  const isHome = href === "/";
-  const underlineColor = isHome ? COLORS.homeUnderline : COLORS.inactive;
-
   return (
     <Highlighter
       action="underline"
-      color={underlineColor}
       strokeWidth={2}
       isActive={isActive}
+      color="currentColor"
     >
       <Link
         href={href}
-        className={`group flex items-center gap-1 text-xl hover:text-white transition-colors duration-200 ${
-          isActive ? "text-white" : "text-[#a8a8a8]"
+        className={`group flex items-center gap-1 text-xl hover:text-foreground transition-colors duration-200 ${
+          isActive ? "text-foreground" : "text-muted-foreground"
         }`}
       >
         {showWreaths && (
@@ -55,9 +46,7 @@ function NavLink({ name, href, isActive, showWreaths = false }: NavLinkProps) {
             icon={LaurelWreathLeft03Icon}
             size={18}
             strokeWidth={1}
-            className={`${
-              isActive ? "text-white" : "text-[#a8a8a8]"
-            } group-hover:text-amber-400 transition-colors`}
+            className="text-amber-400"
           />
         )}
         {name}
@@ -66,9 +55,7 @@ function NavLink({ name, href, isActive, showWreaths = false }: NavLinkProps) {
             icon={LaurelWreathRight03Icon}
             size={18}
             strokeWidth={1}
-            className={`${
-              isActive ? "text-white" : "text-[#a8a8a8]"
-            } group-hover:text-amber-400 transition-colors`}
+            className="text-amber-400"
           />
         )}
       </Link>
@@ -109,6 +96,9 @@ export function Header() {
               isActive={pathname === link.href}
             />
           ))}
+
+          {/* Theme Switcher */}
+          <ThemeSwitcher />
         </div>
       </nav>
     </header>

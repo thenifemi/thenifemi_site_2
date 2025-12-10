@@ -138,17 +138,24 @@ export function ExperienceSection() {
 
   return (
     <section id="experience">
-      <Card className="bg-transparent border-0 md:bg-white/5 md:border md:border-white/10">
+      <Card className="bg-transparent border-0 shadow-none md:bg-muted md:border md:border-border md:shadow-sm">
         <CardHeader className="pb-4 px-0 md:px-6 flex flex-row justify-between gap-4">
-          <CardTitle className="flex items-center gap-3 text-xl font-medium text-white">
-            <HugeiconsIcon icon={WorkIcon} className="w-5 h-5 text-white/60" />
+          <CardTitle className="flex items-center gap-3 text-xl font-medium text-foreground">
+            <HugeiconsIcon
+              icon={WorkIcon}
+              className="w-5 h-5 text-foreground/60"
+            />
             Work Experience
           </CardTitle>
 
           {useMemo(
             () => (
-              <Highlighter action="underline" color="#fff" strokeWidth={2}>
-                <button className="text-white/80 hover:text-white text-lg flex items-center gap-2 cursor-pointer">
+              <Highlighter
+                action="underline"
+                color="currentColor"
+                strokeWidth={2}
+              >
+                <button className="text-foreground/80 hover:text-foreground text-lg flex items-center gap-2 cursor-pointer">
                   Download resumé
                   <Download className="w-4 h-4" />
                 </button>
@@ -161,7 +168,7 @@ export function ExperienceSection() {
         <CardContent className="space-y-6 px-0 md:px-6">
           {visibleExperiences.map((exp, index) => (
             <div key={index} className="flex items-start gap-4">
-              <div className="w-10 h-10  bg-white/10 flex items-center justify-center overflow-hidden flex-shrink-0 mt-0.5">
+              <div className="w-10 h-10  bg-foreground/10 flex items-center justify-center overflow-hidden flex-shrink-0 mt-0.5">
                 <Image
                   src={exp.logo}
                   alt={`${exp.company} logo`}
@@ -178,18 +185,20 @@ export function ExperienceSection() {
                       <a
                         href={exp.website}
                         target="_blank"
-                        className="text-white font-medium text-xl cursor-pointer"
+                        className="text-foreground font-medium text-xl cursor-pointer"
                       >
                         {exp.company}
                       </a>
 
-                      <span className="text-white/80 text-xl whitespace-nowrap ml-auto">
+                      <span className="text-foreground/80 text-xl whitespace-nowrap ml-auto">
                         {exp.totalDuration}
                       </span>
                     </div>
 
                     {exp.location && (
-                      <p className="text-white/40 text-lg">{exp.location}</p>
+                      <p className="text-foreground/40 text-lg">
+                        {exp.location}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -198,7 +207,7 @@ export function ExperienceSection() {
                 <div
                   className={`mt-2 ${
                     exp.roles.length > 1
-                      ? "border-l-2 border-white/10 pl-4 space-y-3"
+                      ? "border-l-2 border-border pl-4 space-y-3"
                       : ""
                   }`}
                 >
@@ -209,16 +218,18 @@ export function ExperienceSection() {
                         <div className="flex items-center justify-start py-2 pb-4">
                           <HugeiconsIcon
                             icon={ArrowUp02Icon}
-                            className="w-4 h-4 text-white/60"
+                            className="w-4 h-4 text-foreground/60"
                           />
-                          <span className="text-white/60 text-lg">
+                          <span className="text-foreground/60 text-lg">
                             promoted to
                           </span>
                         </div>
                       )}
                       <div className="relative">
-                        <p className="text-white/80 text-xl">{role.title}</p>
-                        <p className="text-white/40 text-lg">
+                        <p className="text-foreground/80 text-xl">
+                          {role.title}
+                        </p>
+                        <p className="text-foreground/40 text-lg">
                           {exp.roles.length > 1
                             ? `${role.period} · ${role.duration}`
                             : role.period}
@@ -234,7 +245,7 @@ export function ExperienceSection() {
           {!showAllExperiences && experiences.length > 3 && (
             <button
               onClick={() => setShowAllExperiences(true)}
-              className="w-full py-3 text-white/60 hover:text-white transition-colors flex items-center justify-center gap-2 text-lg cursor-pointer"
+              className="w-full py-3 text-foreground/60 hover:text-foreground transition-colors flex items-center justify-center gap-2 text-lg cursor-pointer"
             >
               See {experiences.length - 3} more
               <ChevronRight className="w-5 h-5 rotate-90" />
@@ -244,7 +255,7 @@ export function ExperienceSection() {
           {showAllExperiences && (
             <button
               onClick={() => setShowAllExperiences(false)}
-              className="w-full py-3 text-white/60 hover:text-white transition-colors flex items-center justify-center gap-2 text-lg cursor-pointer"
+              className="w-full py-3 text-foreground/60 hover:text-foreground transition-colors flex items-center justify-center gap-2 text-lg cursor-pointer"
             >
               See less
               <ChevronRight className="w-5 h-5 -rotate-90" />
