@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useId } from "react"
-import type React from "react"
-import { useInView } from "motion/react"
-import { annotate } from "rough-notation"
-import { type RoughAnnotation } from "rough-notation/lib/model"
+import { useEffect, useRef, useId } from "react";
+import type React from "react";
+import { useInView } from "motion/react";
+import { annotate } from "rough-notation";
+import { type RoughAnnotation } from "rough-notation/lib/model";
 
 type AnnotationAction =
   | "highlight"
@@ -13,22 +13,23 @@ type AnnotationAction =
   | "circle"
   | "strike-through"
   | "crossed-off"
-  | "bracket"
+  | "bracket";
 
 interface HighlighterProps {
-  children: React.ReactNode
-  action?: AnnotationAction
-  color?: string
-  strokeWidth?: number
-  animationDuration?: number
-  iterations?: number
-  padding?: number
-  multiline?: boolean
-  isView?: boolean
+  children: React.ReactNode;
+  action?: AnnotationAction;
+  color?: string;
+  strokeWidth?: number;
+  animationDuration?: number;
+  iterations?: number;
+  padding?: number;
+  multiline?: boolean;
+  isView?: boolean;
+  isActive?: boolean;
 }
 
 // Global set to track which highlighters have already animated
-const animatedHighlighters = new Set<string>()
+const animatedHighlighters = new Set<string>();
 
 export function Highlighter({
   children,
@@ -40,27 +41,32 @@ export function Highlighter({
   padding = 2,
   multiline = true,
   isView = false,
+  isActive = true,
 }: HighlighterProps) {
-  const id = useId()
-  const elementRef = useRef<HTMLSpanElement>(null)
-  const annotationRef = useRef<RoughAnnotation | null>(null)
+  const id = useId();
+  const elementRef = useRef<HTMLSpanElement>(null);
+  const annotationRef = useRef<RoughAnnotation | null>(null);
 
   const isInView = useInView(elementRef, {
     once: true,
     margin: "-10%",
-  })
+  });
 
-  // If isView is false, always show. If isView is true, wait for inView
-  const shouldShow = !isView || isInView
+  // If isView is true, wait for inView before creating annotation
+  const canCreate = !isView || isInView;
 
+  // Create annotation once when conditions are met
   useEffect(() => {
-    if (!shouldShow) return
+    if (!canCreate || !isActive) return;
 
-    const element = elementRef.current
-    if (!element) return
+    const element = elementRef.current;
+    if (!element) return;
 
-    const hasAnimated = animatedHighlighters.has(id)
-    const duration = hasAnimated ? 0 : animationDuration
+    // Skip if annotation already exists
+    if (annotationRef.current) return;
+
+    const hasAnimated = animatedHighlighters.has(id);
+    const duration = hasAnimated ? 0 : animationDuration;
 
     const annotation = annotate(element, {
       type: action,
@@ -70,33 +76,69 @@ export function Highlighter({
       iterations,
       padding,
       multiline,
-    })
+    });
 
-    annotationRef.current = annotation
-    annotation.show()
-    animatedHighlighters.add(id)
+    annotationRef.current = annotation;
+    annotation.show();
+    animatedHighlighters.add(id);
 
+    // Cleanup only on unmount
     return () => {
       if (annotationRef.current) {
-        annotationRef.current.remove()
+        annotationRef.current.remove();
+        annotationRef.current = null;
       }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [canCreate, isActive]);
+
+  // Handle isActive toggle (hide/show without destroying)
+  useEffect(() => {
+    if (!annotationRef.current) return;
+
+    if (isActive) {
+      annotationRef.current.show();
+    } else {
+      annotationRef.current.hide();
     }
-  }, [
-    id,
-    shouldShow,
-    action,
-    color,
-    strokeWidth,
-    animationDuration,
-    iterations,
-    padding,
-    multiline,
-  ])
+  }, [isActive]);
+
+  // Refresh annotation position when layout changes (e.g., sibling expands)
+  useEffect(() => {
+    if (!annotationRef.current) return;
+
+    const refreshAnnotation = () => {
+      if (annotationRef.current && isActive) {
+        // Hide and show to force recalculation of position
+        annotationRef.current.hide();
+        annotationRef.current.show();
+      }
+    };
+
+    // Use ResizeObserver on document body to detect layout changes
+    const resizeObserver = new ResizeObserver(() => {
+      // Debounce the refresh
+      requestAnimationFrame(refreshAnnotation);
+    });
+
+    resizeObserver.observe(document.body);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [isActive]);
 
   return (
-    <span ref={elementRef} className="relative inline-block bg-transparent">
+    <span
+      ref={elementRef}
+      className="relative inline-block bg-transparent"
+      style={{
+        paddingBottom: `${strokeWidth}px`,
+        paddingLeft: `${padding}px`,
+        paddingRight: `${padding}px`,
+      }}
+    >
       {children}
     </span>
-  )
+  );
 }
-

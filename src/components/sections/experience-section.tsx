@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { ChevronRight, Download } from "lucide-react";
-import { WorkIcon } from "@hugeicons/core-free-icons";
+import { ArrowUp02Icon, WorkIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { Highlighter } from "@/components/ui/highlighter";
 
 interface Role {
   title: string;
@@ -26,17 +26,17 @@ const experiences: Experience[] = [
   {
     company: "Fetchly Labs",
     location: "Denver, Colorado, United States",
-    totalDuration: "1 yr 2 mos",
+    totalDuration: "1 year, 2 months",
     logo: "/logos/fetchly.jpeg",
     roles: [
       {
         title: "Software Architect",
-        duration: "7 mos",
+        duration: "7 months",
         period: "Jun 2025 — Present",
       },
       {
         title: "Senior Software Engineer",
-        duration: "8 mos",
+        duration: "8 months",
         period: "Nov 2024 — Jun 2025",
       },
     ],
@@ -44,12 +44,12 @@ const experiences: Experience[] = [
   {
     company: "tem mimo",
     location: "",
-    totalDuration: "1 yr 8 mos",
+    totalDuration: "1 year, 8 months",
     logo: "/logos/mimo_logo.png",
     roles: [
       {
         title: "Founder & Principal Software Engineer",
-        duration: "1 yr 8 mos",
+        duration: "1 year, 8 months",
         period: "May 2024 — Present",
       },
     ],
@@ -57,12 +57,12 @@ const experiences: Experience[] = [
   {
     company: "ArcTouch",
     location: "San Francisco, California, United States",
-    totalDuration: "1 yr 4 mos",
+    totalDuration: "1 year, 4 months",
     logo: "/logos/arctouch.png",
     roles: [
       {
         title: "Senior Software Engineer",
-        duration: "1 yr 4 mos",
+        duration: "1 year, 4 months",
         period: "Aug 2023 — Nov 2024",
       },
     ],
@@ -70,12 +70,12 @@ const experiences: Experience[] = [
   {
     company: "Fetchly Labs",
     location: "Texas, United States",
-    totalDuration: "2 yrs",
+    totalDuration: "2 years, 4 months",
     logo: "/logos/fetchly.jpeg",
     roles: [
       {
         title: "Software Engineer",
-        duration: "2 yrs",
+        duration: "2 years, 4 months",
         period: "Sep 2021 — Aug 2023",
       },
     ],
@@ -83,12 +83,12 @@ const experiences: Experience[] = [
   {
     company: "Null Bug",
     location: "Francisco Beltrão, Paraná, Brazil",
-    totalDuration: "1 yr 3 mos",
+    totalDuration: "1 year, 3 months",
     logo: "/logos/nullbug.jpeg",
     roles: [
       {
         title: "Software Developer",
-        duration: "1 yr 3 mos",
+        duration: "1 year, 3 months",
         period: "Dec 2020 — Feb 2022",
       },
     ],
@@ -96,12 +96,12 @@ const experiences: Experience[] = [
   {
     company: "Rocket Software",
     location: "Blumenau, Santa Catarina, Brazil",
-    totalDuration: "2 yrs 4 mos",
+    totalDuration: "2 years, 4 months",
     logo: "/logos/R.png",
     roles: [
       {
         title: "Mobile Application Developer",
-        duration: "2 yrs 4 mos",
+        duration: "2 years, 4 months",
         period: "Jun 2019 — Sep 2021",
       },
     ],
@@ -109,12 +109,12 @@ const experiences: Experience[] = [
   {
     company: "Protech Advance",
     location: "",
-    totalDuration: "3 mos",
+    totalDuration: "3 months",
     logo: "/logos/nck.jpeg",
     roles: [
       {
         title: "Web Development Intern",
-        duration: "3 mos",
+        duration: "3 months",
         period: "Jul 2018 — Sep 2018",
       },
     ],
@@ -129,7 +129,7 @@ export function ExperienceSection() {
     : experiences.slice(0, 3);
 
   return (
-    <section id="experience" className="mt-16">
+    <section id="experience">
       <Card className="bg-transparent border-0 md:bg-white/5 md:border md:border-white/10">
         <CardHeader className="pb-4 px-0 md:px-6 flex flex-row justify-between gap-4">
           <CardTitle className="flex items-center gap-3 text-xl font-medium text-white">
@@ -137,13 +137,17 @@ export function ExperienceSection() {
             Work Experience
           </CardTitle>
 
-          <Button
-            variant="outline"
-            className="border-white/10 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white text-lg"
-          >
-            Download resumé
-            <Download className="w-4 h-4" />
-          </Button>
+          {useMemo(
+            () => (
+              <Highlighter action="underline" color="#fff" strokeWidth={2}>
+                <button className="text-white/80 hover:text-white text-lg flex items-center gap-2 cursor-pointer">
+                  Download resumé
+                  <Download className="w-4 h-4" />
+                </button>
+              </Highlighter>
+            ),
+            []
+          )}
         </CardHeader>
 
         <CardContent className="space-y-6 px-0 md:px-6">
@@ -161,23 +165,53 @@ export function ExperienceSection() {
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2">
-                  <div>
-                    <h3 className="text-white font-medium text-xl">{exp.company}</h3>
+                  <div className="w-full">
+                    <div className="flex items-center justify-between gap-2">
+                      <h3 className="text-white font-medium text-xl">
+                        {exp.company}
+                      </h3>
+
+                      <span className="text-white/80 text-xl whitespace-nowrap ml-auto">
+                        {exp.totalDuration}
+                      </span>
+                    </div>
+
                     {exp.location && (
                       <p className="text-white/40 text-lg">{exp.location}</p>
                     )}
                   </div>
-                  <span className="text-white/80 text-xl whitespace-nowrap">
-                    {exp.totalDuration}
-                  </span>
                 </div>
 
                 {/* Roles */}
-                <div className={`mt-2 ${exp.roles.length > 1 ? "border-l-2 border-white/10 pl-4 space-y-3" : ""}`}>
+                <div
+                  className={`mt-2 ${
+                    exp.roles.length > 1
+                      ? "border-l-2 border-white/10 pl-4 space-y-3"
+                      : ""
+                  }`}
+                >
                   {exp.roles.map((role, roleIndex) => (
-                    <div key={roleIndex} className="relative">
-                      <p className="text-white/80 text-xl">{role.title}</p>
-                      <p className="text-white/40 text-lg">{role.period} · {role.duration}</p>
+                    <div key={roleIndex}>
+                      {/* Show arrow between roles (before all roles except the first) */}
+                      {exp.roles.length > 1 && roleIndex > 0 && (
+                        <div className="flex items-center justify-start py-2 pb-4">
+                          <HugeiconsIcon
+                            icon={ArrowUp02Icon}
+                            className="w-4 h-4 text-white/60"
+                          />
+                          <span className="text-white/60 text-lg">
+                            promoted to
+                          </span>
+                        </div>
+                      )}
+                      <div className="relative">
+                        <p className="text-white/80 text-xl">{role.title}</p>
+                        <p className="text-white/40 text-lg">
+                          {exp.roles.length > 1
+                            ? `${role.period} · ${role.duration}`
+                            : role.period}
+                        </p>
+                      </div>
                     </div>
                   ))}
                 </div>
