@@ -91,7 +91,7 @@ export function Footer() {
       {/* Copyright */}
       <div className="flex items-center gap-2 text-muted-foreground text-base">
         <HugeiconsIcon icon={CopyrightIcon} size={16} strokeWidth={1.5} />
-        <span>{currentYear} Purple Engineering.</span>
+        <span>{currentYear} Nifemi, Purple Engineering.</span>
       </div>
     </footer>
   );

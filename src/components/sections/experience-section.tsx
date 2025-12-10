@@ -58,7 +58,7 @@ const experiences: Experience[] = [
     ],
   },
   {
-    company: "ArcTouch",
+    company: "ArcTouch, AKQA",
     website: "https://arctouch.com",
     location: "San Francisco, California",
     totalDuration: "1 year, 4 months",
