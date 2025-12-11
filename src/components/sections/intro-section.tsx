@@ -10,15 +10,15 @@ export function IntroSection() {
 
   return (
     <section>
-      <p className="text-2xl text-foreground/80 mb-2">
+      <p className="text-3xl text-foreground/80 mb-2">
         <span className="text-foreground">Nifemi</span> here!
       </p>
 
-      <p className="text-2xl text-foreground/80">
-        Software engineer with over 7 years of{" "}
+      <p className="text-3xl text-foreground/80">
+        Software engineer with over seven years of{" "}
         <Link
           href="#experience"
-          className="hover:text-foreground transition-colors text-2xl"
+          className="hover:text-foreground transition-colors text-3xl"
         >
           <Highlighter
             action="underline"
@@ -36,7 +36,7 @@ export function IntroSection() {
       <div className="flex justify-end">
         <button
           onClick={() => setExpanded(!expanded)}
-          className="text-sm text-foreground/80 hover:text-foreground transition-colors flex items-center gap-1 cursor-pointer"
+          className="text-base text-foreground/80 hover:text-foreground transition-colors flex items-center gap-1 cursor-pointer"
         >
           {expanded ? "Read less" : "Read more"}
           <ChevronRight
@@ -48,7 +48,7 @@ export function IntroSection() {
       </div>
 
       {expanded && (
-        <div className="mt-2 space-y-4 text-2xl text-foreground/80 animate-in fade-in slide-in-from-top-2 duration-300">
+        <div className="mt-2 space-y-4 text-3xl text-foreground/80 animate-in fade-in slide-in-from-top-2 duration-300">
           <p>
             In addition to my professional work, I also have a passion for
             open-source projects. I&apos;ve authored and contributed to a number

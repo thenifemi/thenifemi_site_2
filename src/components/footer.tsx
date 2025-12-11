@@ -36,12 +36,12 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="flex flex-col items-center gap-14 py-12 px-6 mt-16 border-t border-border">
+    <footer className="flex flex-col items-center gap-12 py-12 px-6 mt-16 border-t border-border">
       {/* Nifemi with Wreaths */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-2 md:gap-6">
         <Link
           href="/"
-          className="group flex items-center gap-1 text-xl text-foreground hover:text-foreground/80 transition-colors"
+          className="group flex items-center gap-1 text-2xl text-foreground hover:text-foreground/80 transition-colors"
         >
           <HugeiconsIcon
             icon={LaurelWreathLeft03Icon}
@@ -64,7 +64,7 @@ export function Footer() {
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-foreground/80 hover:text-foreground text-lg flex items-center gap-2 cursor-pointer"
+            className="text-foreground/80 hover:text-foreground text-2xl flex items-center gap-2 cursor-pointer"
           >
             Download resumé
             <Download className="w-4 h-4" />
@@ -80,16 +80,16 @@ export function Footer() {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors duration-200"
+            className="flex items-center gap-2 text-foreground/80 hover:text-foreground transition-colors duration-200"
           >
             <HugeiconsIcon icon={link.icon} size={20} strokeWidth={1.5} />
-            <span className="text-xl">{link.text}</span>
+            <span className="text-2xl ">{link.text}</span>
           </a>
         ))}
       </div>
 
       {/* Copyright */}
-      <div className="flex items-center gap-2 text-muted-foreground text-base">
+      <div className="flex items-center gap-2 text-muted-foreground text-xl">
         <HugeiconsIcon icon={CopyrightIcon} size={16} strokeWidth={1.5} />
         <span>{currentYear} Nifemi, Purple Engineering.</span>
       </div>

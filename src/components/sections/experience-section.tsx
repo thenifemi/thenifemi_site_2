@@ -58,7 +58,7 @@ const experiences: Experience[] = [
     ],
   },
   {
-    company: "ArcTouch, AKQA",
+    company: "ArcTouch",
     website: "https://arctouch.com",
     location: "San Francisco, California",
     totalDuration: "1 year, 4 months",
@@ -138,9 +138,9 @@ export function ExperienceSection() {
 
   return (
     <section id="experience">
-      <Card className="bg-transparent border-0 shadow-none md:bg-muted md:border md:border-border md:shadow-sm">
+      <Card className="bg-transparent border-0 md:bg-foreground/5 md:border md:border-border">
         <CardHeader className="pb-4 px-0 md:px-6 flex flex-row justify-between gap-4">
-          <CardTitle className="flex items-center gap-3 text-xl font-medium text-foreground">
+          <CardTitle className="flex items-center gap-3 text-2xl font-medium text-foreground">
             <HugeiconsIcon
               icon={WorkIcon}
               className="w-5 h-5 text-foreground/60"
@@ -155,7 +155,7 @@ export function ExperienceSection() {
                 color="currentColor"
                 strokeWidth={2}
               >
-                <button className="text-foreground/80 hover:text-foreground text-lg flex items-center gap-2 cursor-pointer">
+                <button className="text-foreground/80 hover:text-foreground text-xl flex items-center gap-2 cursor-pointer">
                   Download resumé
                   <Download className="w-4 h-4" />
                 </button>
@@ -168,7 +168,7 @@ export function ExperienceSection() {
         <CardContent className="space-y-6 px-0 md:px-6">
           {visibleExperiences.map((exp, index) => (
             <div key={index} className="flex items-start gap-4">
-              <div className="w-10 h-10  bg-foreground/10 flex items-center justify-center overflow-hidden flex-shrink-0 mt-0.5">
+              <div className="w-10 h-10 bg-foreground/10 flex items-center justify-center overflow-hidden flex-shrink-0 mt-0.5">
                 <Image
                   src={exp.logo}
                   alt={`${exp.company} logo`}
@@ -185,7 +185,7 @@ export function ExperienceSection() {
                       <a
                         href={exp.website}
                         target="_blank"
-                        className="text-foreground font-medium text-xl cursor-pointer"
+                        className="text-foreground font-medium text-2xl cursor-pointer"
                       >
                         {exp.company}
                       </a>
@@ -196,7 +196,7 @@ export function ExperienceSection() {
                     </div>
 
                     {exp.location && (
-                      <p className="text-foreground/40 text-lg">
+                      <p className="text-foreground/40 text-xl">
                         {exp.location}
                       </p>
                     )}
@@ -220,16 +220,16 @@ export function ExperienceSection() {
                             icon={ArrowUp02Icon}
                             className="w-4 h-4 text-foreground/60"
                           />
-                          <span className="text-foreground/60 text-lg">
+                          <span className="text-foreground/60 text-xl">
                             promoted to
                           </span>
                         </div>
                       )}
                       <div className="relative">
-                        <p className="text-foreground/80 text-xl">
+                        <p className="text-foreground/80 text-2xl">
                           {role.title}
                         </p>
-                        <p className="text-foreground/40 text-lg">
+                        <p className="text-foreground/40 text-xl">
                           {exp.roles.length > 1
                             ? `${role.period} · ${role.duration}`
                             : role.period}
@@ -245,7 +245,7 @@ export function ExperienceSection() {
           {!showAllExperiences && experiences.length > 3 && (
             <button
               onClick={() => setShowAllExperiences(true)}
-              className="w-full py-3 text-foreground/60 hover:text-foreground transition-colors flex items-center justify-center gap-2 text-lg cursor-pointer"
+              className="w-full py-2 text-foreground/60 hover:text-foreground transition-colors flex items-center justify-center gap-2 text-xl cursor-pointer"
             >
               See {experiences.length - 3} more
               <ChevronRight className="w-5 h-5 rotate-90" />
@@ -255,7 +255,7 @@ export function ExperienceSection() {
           {showAllExperiences && (
             <button
               onClick={() => setShowAllExperiences(false)}
-              className="w-full py-3 text-foreground/60 hover:text-foreground transition-colors flex items-center justify-center gap-2 text-lg cursor-pointer"
+              className="w-full py-2 text-foreground/60 hover:text-foreground transition-colors flex items-center justify-center gap-2 text-xl cursor-pointer"
             >
               See less
               <ChevronRight className="w-5 h-5 -rotate-90" />

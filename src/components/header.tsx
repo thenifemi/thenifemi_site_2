@@ -37,7 +37,7 @@ function NavLink({ name, href, isActive, showWreaths = false }: NavLinkProps) {
     >
       <Link
         href={href}
-        className={`group flex items-center gap-1 text-xl hover:text-foreground transition-colors duration-200 ${
+        className={`group flex items-center gap-1 text-2xl hover:text-foreground transition-colors duration-200 ${
           isActive ? "text-foreground" : "text-muted-foreground"
         }`}
       >
