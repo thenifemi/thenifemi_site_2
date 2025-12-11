@@ -138,7 +138,7 @@ export function ExperienceSection() {
 
   return (
     <section id="experience">
-      <Card className="bg-transparent border-0 md:bg-foreground/5 md:border md:border-border">
+      <Card className="bg-transparent border-0 shadow-none md:bg-foreground/5 md:border md:border-border">
         <CardHeader className="pb-4 px-0 md:px-6 flex flex-row justify-between gap-4">
           <CardTitle className="flex items-center gap-3 text-2xl font-medium text-foreground">
             <HugeiconsIcon
